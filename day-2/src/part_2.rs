@@ -3,11 +3,11 @@ struct Range {
     end: i64,
 }
 
-pub struct Part1 {
+pub struct Part2 {
     input: String,
 }
 
-impl Part1 {
+impl Part2 {
     pub fn new(input_str: &str) -> Self {
         Self {
             input: input_str.to_string(),
@@ -22,7 +22,7 @@ impl Part1 {
         }
 
         let solution: i64 = result.iter().sum();
-        println!("Part 1 final solution: {}", solution);
+        println!("Part 2 final solution: {}", solution);
     }
 
     fn split_range(&self, range: Range) -> Vec<i64> {
