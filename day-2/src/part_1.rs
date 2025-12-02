@@ -21,11 +21,7 @@ impl Part1 {
             result.append(&mut self.split_range(r));
         }
 
-        let mut final_solution = 0;
-        for solution in result {
-            final_solution += solution;
-        }
-
+        let final_solution: i64 = result.iter().sum();
         println!("Part 1 final solution: {}", final_solution);
     }
 
