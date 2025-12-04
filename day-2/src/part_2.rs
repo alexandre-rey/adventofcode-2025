@@ -25,19 +25,33 @@ impl Part2 {
         println!("Part 2 final solution: {}", solution);
     }
 
-    fn split_range(&self, range: Range) -> Vec<i64> {
-        let mut result = Vec::new();
-        for i in range.start..(range.end + 1) {
-            let digit_count = i.checked_ilog10().unwrap_or(0) + 1;
-            if digit_count % 2 != 0 {
+    fn is_repeated_substring(&self, n: i64) -> bool {
+        let s = n.to_string();
+        let len = s.len();
+
+        // Try each possible pattern length
+        for pat_len in 1..=(len / 2) {
+            if len % pat_len != 0 {
                 continue;
             }
 
-            let divider = i64::from(10).pow(digit_count / 2);
-            let first_part = i / divider;
-            let second_part = i % divider;
+            let repeats = len / pat_len;
+            let pat = &s[..pat_len];
 
-            if first_part == second_part {
+            // Build the candidate string
+            let candidate = pat.repeat(repeats);
+
+            if candidate == s {
+                return true;
+            }
+        }
+        false
+    }
+
+    fn split_range(&self, range: Range) -> Vec<i64> {
+        let mut result = Vec::new();
+        for i in range.start..(range.end + 1) {
+            if self.is_repeated_substring(i) {
                 result.push(i);
             }
         }
